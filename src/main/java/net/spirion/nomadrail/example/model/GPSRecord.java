@@ -1,4 +1,4 @@
-package net.spirion.nomadrail.example.context.model;
+package net.spirion.nomadrail.example.model;
 
 /**
  * <p>

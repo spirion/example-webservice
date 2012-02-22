@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Random;
 
-import net.spirion.nomadrail.example.context.model.CCURecord;
-import net.spirion.nomadrail.example.context.model.GPSRecord;
+import net.spirion.nomadrail.example.model.CCURecord;
+import net.spirion.nomadrail.example.model.GPSRecord;
 import net.spirion.nomadrail.example.repositories.CCUCoordinateRepository;
 
 import org.junit.Before;

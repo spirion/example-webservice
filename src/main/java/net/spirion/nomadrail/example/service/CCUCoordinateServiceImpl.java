@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.jws.WebService;
 
-import net.spirion.nomadrail.example.context.model.CCURecord;
+import net.spirion.nomadrail.example.model.CCURecord;
 import net.spirion.nomadrail.example.repositories.CCUCoordinateRepository;
 
 import org.codehaus.jackson.map.ObjectMapper;

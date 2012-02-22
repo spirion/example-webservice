@@ -2,7 +2,7 @@ package net.spirion.nomadrail.example.repositories;
 
 import java.util.List;
 
-import net.spirion.nomadrail.example.context.model.CCURecord;
+import net.spirion.nomadrail.example.model.CCURecord;
 
 import org.springframework.data.repository.CrudRepository;
 
