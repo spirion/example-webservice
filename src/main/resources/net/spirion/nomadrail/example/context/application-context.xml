@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.1.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    
+    <!-- Load the application propert files.  As I am using Spring 3.1 the property files are loaded by the profile name
+    	 (e.g. dev, test, prod) which is set in a context-param of name spring.profiles.active in the web.xml or set
+    	 as a system property of JNDI reference at runtime. -->
+  	<beans profile="dev">
+		<context:property-placeholder location="classpath:/net/spirion/nomadrail/example/config/dev.mongo.properties"/>
+	</beans>
+	<beans profile="test">
+		<context:property-placeholder location="classpath:/net/spirion/nomadrail/example/config/test.mongo.properties"/>
+	</beans>
+	<beans profile="prod">
+		<context:property-placeholder location="classpath:/net/spirion/nomadrail/example/config/prod.mongo.properties"/>
+	</beans>
+    
+   
+    <beans>
+     	<!-- Load the CXF specific resources -->
+	    <import resource="classpath:META-INF/cxf/cxf.xml" />
+		<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	    
+	    <!-- Component scan for additional Spring annotation related configurations.  Specifically, as the Srping beans
+	    	 in the application are referenced by annotations, this will load the endpoint service named 
+	    	 "ccuCoordinateService" used by the CXF web service. -->
+		<context:annotation-config />
+	   	<context:component-scan base-package="net.spirion.nomadrail" />
+	   	
+	   	<!--  Import the persistence context which sets up the Spring Data repository. -->
+		<import resource="persistence-context.xml"/>
+		
+    </beans>
+    
+</beans>
