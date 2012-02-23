@@ -1,20 +1,30 @@
 package net.spirion.nomadrail.example.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * <p>
- * Convenience POJO used to define GPS data for the CCU Record.
+ * Convenience POJO used to hold GPS data for the CCU Record.
  * </p>
  * @author Michael Conway
  * @version 0.1
  *
  */
+@XmlType(name= "gps", propOrder={"bearing", "latitude", "longitude", "sats", "speed"})
 public class GPSRecord {
 
-	private Integer bearing;
-	private Double latitude;
-	private Double longitude;
-	private Integer sats;
-	private Integer speed;
+	@XmlElement private Integer bearing;
+	@XmlElement private Double latitude;
+	@XmlElement private Double longitude;
+	@XmlElement private Integer sats;
+	@XmlElement private Integer speed;
+	
+	/**
+	 * No argument constructor for JAXB integration.
+	 */
+	public GPSRecord() {
+	}
 	
 	/**
 	 * Constructor utilising all properties.

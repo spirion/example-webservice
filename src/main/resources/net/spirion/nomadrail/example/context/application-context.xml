@@ -7,9 +7,9 @@
           http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
     
-    <!-- Load the application propert files.  As I am using Spring 3.1 the property files are loaded by the profile name
-    	 (e.g. dev, test, prod) which is set in a context-param of name spring.profiles.active in the web.xml or set
-    	 as a system property of JNDI reference at runtime. -->
+    <!-- Load the application property files.  As I am using Spring 3.1 the property files are loaded in by the profile 
+    	 name (e.g. dev, test, prod) which is set in a context-param of name spring.profiles.active in the web.xml or 
+    	 set as a system property or JNDI reference at runtime. -->
   	<beans profile="dev">
 		<context:property-placeholder location="classpath:/net/spirion/nomadrail/example/config/dev.mongo.properties"/>
 	</beans>
@@ -19,20 +19,21 @@
 	<beans profile="prod">
 		<context:property-placeholder location="classpath:/net/spirion/nomadrail/example/config/prod.mongo.properties"/>
 	</beans>
-    
+	<beans profile="cloudbees">
+		<context:property-placeholder location="classpath:/net/spirion/nomadrail/example/config/cloudbees.mongo.properties"/>
+	</beans>    
    
     <beans>
      	<!-- Load the CXF specific resources -->
 	    <import resource="classpath:META-INF/cxf/cxf.xml" />
-		<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	    
 	    <!-- Component scan for additional Spring annotation related configurations.  Specifically, as the Srping beans
-	    	 in the application are referenced by annotations, this will load the endpoint service named 
-	    	 "ccuCoordinateService" used by the CXF web service. -->
+	    	 in the application are referenced by annotations, this will load the service named "ccuCoordinateService" 
+	    	 used by the CXF web service into the Spring configuration. -->
 		<context:annotation-config />
 	   	<context:component-scan base-package="net.spirion.nomadrail" />
 	   	
-	   	<!--  Import the persistence context which sets up the Spring Data repository. -->
+	   	<!--  Import the persistence context. -->
 		<import resource="persistence-context.xml"/>
 		
     </beans>

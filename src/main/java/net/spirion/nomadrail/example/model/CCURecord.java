@@ -1,5 +1,9 @@
 package net.spirion.nomadrail.example.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,8 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * <p>
  * Annotated POJO class used to define the CCU Coordinate Record for the CCU Coordinate Repository.  This class utilises
  * Spring Data to abstract away the underlying data source implementation.  As I'm using Mongo DB as a convenience 
- * rather than setting up the full Hibernate/JPA/MySql stack I are also a String Data MongoDB annotation (@Document)
- * which will be ignored in all cases except where Spring Data MongoDB component scanning is in force. 
+ * rather than setting up the full Hibernate/JPA/MySql stack I am also using a Spring Data MongoDB annotation 
+ * (@Document) which will be ignored in all cases except where Spring Data MongoDB component scanning is in force. 
  * </p>
  * 
  * @author Michael Conway
@@ -16,13 +20,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  */
 @Document(collection="ccurecord")
+@XmlRootElement(name="ccu")
+@XmlType(propOrder={"designation", "gps"})
 public class CCURecord {
 
 	@SuppressWarnings("unused")
 	@Id private String id;
 	
-	private String designation;
-	private GPSRecord gps;
+	@XmlElement	private String designation;
+	@XmlElement private GPSRecord gps;
+
+	/**
+	 * No argument constructor for JAXB integration.
+	 */
+	public CCURecord() {
+	}
 	
 	/**
 	 * Constructor utilising all properties.

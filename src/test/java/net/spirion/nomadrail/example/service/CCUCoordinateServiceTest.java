@@ -2,6 +2,7 @@ package net.spirion.nomadrail.example.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
 import java.util.Random;
 
 import net.spirion.nomadrail.example.model.CCURecord;
@@ -54,13 +55,13 @@ public class CCUCoordinateServiceTest {
 	
 	@Test
 	public void testListCoordinates() {
-		String json = null;
+		List<CCURecord> l = null;
 		try {
-			json = this.service.listCoordinates();
+			l = this.service.listCoordinates();
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		assertNotNull(json);
+		assertNotNull(l);
 	}
 	
 }

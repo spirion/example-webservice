@@ -3,7 +3,7 @@ package net.spirion.nomadrail.example.service;
 /**
  * <p>
  * Exception class used to wrap service level exceptions.  Used as a convenience simply to show here that something
- * should be done regards exception handling.
+ * should be done regards exception handling.  This class is not in use in the example web application.
  * </p>
  * 
  * @author Michael Conway

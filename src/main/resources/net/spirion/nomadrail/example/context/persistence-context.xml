@@ -3,19 +3,42 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/data/mongo
         http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
 
-	<mongo:db-factory id="mongoDbFactory"
-		host="${nomadrail.mongo.host}"
-		port="${nomadrail.mongo.port}"
-		dbname="${nomadrail.mongo.dbname}" />
+	<!-- Note that this is where an alternative Repository could be set up which utilises JPA/MySql. -->
+	<beans profile="dev,test,prod">
 	
-	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-	</bean>
+		<mongo:db-factory id="mongoDbFactory"
+			host="${nomadrail.mongo.host}"
+			port="${nomadrail.mongo.port}"
+			dbname="${nomadrail.mongo.dbname}" />
 		
-	<mongo:repositories base-package="net.spirion.nomadrail.example.repositories" mongo-template-ref="mongoTemplate" />
+		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+			<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		</bean>
+			
+		<mongo:repositories base-package="net.spirion.nomadrail.example.repositories" mongo-template-ref="mongoTemplate" />
 
+	</beans>
+	
+	<!-- CloudBees specific set up uses username and password -->
+	<beans profile="cloudbees">
+	
+		<mongo:db-factory id="mongoDbFactoryCloudbees"
+			host="${nomadrail.mongo.host}"
+			port="${nomadrail.mongo.port}"
+			dbname="${nomadrail.mongo.dbname}"
+			username="${nomadrail.mongo.username}"
+			password="${nomadrail.mongo.password}" />
+		
+		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+			<constructor-arg name="mongoDbFactory" ref="mongoDbFactoryCloudbees"/>
+		</bean>
+			
+		<mongo:repositories base-package="net.spirion.nomadrail.example.repositories" mongo-template-ref="mongoTemplate" />
+	
+	</beans>
+	
 </beans>

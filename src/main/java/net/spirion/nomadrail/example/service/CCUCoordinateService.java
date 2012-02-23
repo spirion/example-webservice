@@ -1,23 +1,25 @@
 package net.spirion.nomadrail.example.service;
 
-import javax.jws.WebService;
+import java.util.List;
+
+import net.spirion.nomadrail.example.model.CCURecord;
 
 /**
  * <p>
- * Example web service interface defining the methods exposed for the CCU Coordinate service.
+ * Service interface defining the methods exposed for the CCU Coordinate service.
  * </p>
  * @author Michael Conway
  * @version 0.1
  *
  */
-@WebService
+
 public interface CCUCoordinateService {
 
 	/**
 	 * List the coordinates of all CCUs known to the system.
-	 * @return A simple JSON encoded string of all available CCUs
-	 * @throws ServiceException
+	 * @return A list of <code>CCURecord</code> objects
+	 * @throws ServiceException Optional depending on implementation
 	 */
-	public String listCoordinates() throws ServiceException;
+	public List<CCURecord> listCoordinates() throws ServiceException;
 		
 }

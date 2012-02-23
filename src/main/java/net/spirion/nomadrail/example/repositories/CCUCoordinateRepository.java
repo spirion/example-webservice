@@ -8,8 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  * <p>
- * This is a Spring Data extended <code>CrudRepostiory</code> used to define the basic CRUD operations for the 
- * CCU Coordinate repository.
+ * This is a Spring Data extended <code>CrudRepostiory</code> used to define the basic operations for the 
+ * CCU Coordinate repository.  I've included an unused method here to show how easy it is to set up additional finders.
  * </p>
  * 
  * @author Michael Conway
